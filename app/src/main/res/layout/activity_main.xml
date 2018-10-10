@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/Title"
+        android:text="SSID: shiraz\nPassword: ************"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/StartScanButton"
+        android:text="Scan"
+        android:layout_marginStart="10dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/Title"/>
+
+    <Button
+        android:id="@+id/StopScanButton"
+        android:text="Stop Scanning"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/Title"/>
+
+    <TextView
+        android:id="@+id/DevicesView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="30"
+        android:scrollbars="vertical"
+        android:layout_below="@id/StartScanButton"/>
+
+    <Button
+        android:id="@+id/ConnectBLE"
+        android:text="Connect to BLE"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/DevicesView"/>
+
+    <Button
+        android:id="@+id/SendData"
+        android:text="Send Data"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/DevicesView"/>
+
+    <TextView
+        android:id="@+id/PeripheralTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="30"
+        android:scrollbars="vertical"
+        android:layout_below="@id/SendData"/>
+
+</RelativeLayout>
