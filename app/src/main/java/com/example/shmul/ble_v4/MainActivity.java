@@ -19,6 +19,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     // GUI Variables
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     BluetoothLeScanner btScanner;
     private final static int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
+
+    // Data processing Variables
+    ArrayList<String> listOfDevices = new ArrayList<>();
+    int i_scan = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +110,19 @@ public class MainActivity extends AppCompatActivity {
     private ScanCallback leScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
+
+            String deviceName;
+            // General logout
             peripheralTextView.append("Device Name: " + result.getDevice().getName() + " rssi: " + result.getRssi() + "\n");
+
+            // Data management
+            deviceName = result.getDevice().getName();
+            if (!listOfDevices.contains(deviceName)) {
+                listOfDevices.add(deviceName);
+                devicesView.append(listOfDevices.get(i_scan) + "\n");
+                i_scan++;
+            }
+
 
             // auto scroll for text view
             final int scrollAmount = peripheralTextView.getLayout().getLineTop(peripheralTextView.getLineCount()) - peripheralTextView.getHeight();
