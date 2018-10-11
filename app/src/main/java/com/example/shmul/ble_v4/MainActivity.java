@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     // GUI Variables
     Button startScanButton, stopScanButton, connectBLE, sendData;
-    TextView devicesView, peripheralTextView;
+    TextView devicesView, peripheralTextView, devicesToConnect;
 
     // BLE Variables
     BluetoothManager btManager;
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         devicesView.setMovementMethod(new ScrollingMovementMethod());
         peripheralTextView = findViewById(R.id.PeripheralTextView);
         peripheralTextView.setMovementMethod(new ScrollingMovementMethod());
+        devicesToConnect = findViewById(R.id.DevicesToConnect);
+        devicesToConnect.setMovementMethod(new ScrollingMovementMethod());
 
         // BLE items initiation
         btManager = (BluetoothManager)getSystemService(Context.BLUETOOTH_SERVICE);
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         public void onScanResult(int callbackType, ScanResult result) {
 
             String deviceName;
+
             // General logout
             peripheralTextView.append("Device Name: " + result.getDevice().getName() + " rssi: " + result.getRssi() + "\n");
 
@@ -120,9 +123,18 @@ public class MainActivity extends AppCompatActivity {
             if (!listOfDevices.contains(deviceName)) {
                 listOfDevices.add(deviceName);
                 devicesView.append(listOfDevices.get(i_scan) + "\n");
-                i_scan++;
-            }
 
+                // Find the right device which is more then 10 characters and starts with "easysense"
+                if(deviceName!=null) {
+                    if (deviceName.length()>9){
+                        if (deviceName.substring(0, 9).equals("easysense")) {
+                            devicesToConnect.append(deviceName + "\n");
+                        }
+                    } // String length is more than ...
+                } // device not null
+
+                i_scan++;
+            } // if the name of the device is already exist
 
             // auto scroll for text view
             final int scrollAmount = peripheralTextView.getLayout().getLineTop(peripheralTextView.getLineCount()) - peripheralTextView.getHeight();
@@ -167,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 btScanner.startScan(leScanCallback);
             }
         });
+        devicesToConnect.append("Suitable to connect:\n");
     }
 
     public void stopScanning() {
